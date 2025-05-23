@@ -1,0 +1,30 @@
+[
+  {
+    "id": 4711,
+    "user_id": 12345,
+    "rheuma_type": "rheumatoid-arthritis",
+    "medication": [
+      {
+        "status": "active",
+        "prescribed_at": "2025-01-01",
+        "name": "methotrexate",
+        "dose": "10 mg",
+        "morning": 1,
+        "afternoon": 0,
+        "evening": 0,
+        "night": 0
+      },
+      {
+        "status": "stopped",
+        "prescribed_at": "2025-01-01",
+        "stopped_at": "2025-02-01",
+        "name": "adalimumab",
+        "dose": "40 mg",
+        "morning": 1,
+        "afternoon": 0,
+        "evening": 0,
+        "night": 0
+      }
+    ]
+  }
+]
