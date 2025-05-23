@@ -2,10 +2,10 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-f', 'demo-backend/Dockerfile',        # 👈 Pfad zur Dockerfile im Repo
-      '-t', 'gcr.io/$PROJECT_ID/quarkus-app', # 👈 Image-Tag
-      '.'                                      # 👈 Kontext wird unten gesetzt
+      '-f', 'Dockerfile',                    # Dockerfile liegt direkt in demo-backend
+      '-t', 'gcr.io/$PROJECT_ID/quarkus-app',
+      '.'                                    # Kontext: alles in demo-backend
     ]
-    dir: 'demo-backend'  # 👈 DAS MACHT DEN UNTERSCHIED!
+    dir: 'demo-backend'  # <- DAS ist der Fix: wir betreten /demo-backend vor dem Build
 images:
   - 'gcr.io/$PROJECT_ID/quarkus-app'
