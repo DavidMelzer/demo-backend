@@ -2,9 +2,9 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-f', 'demo-backend/Dockerfile',
       '-t', 'gcr.io/$PROJECT_ID/quarkus-app',
-      'demo-backend'  # 👈 das ist jetzt der Kontext
+      '.'  # 👈 Build-Kontext ist Root des Repos
     ]
+    dir: '.'  # 👈 wichtig: das ist der Ordner mit Dockerfile & pom.xml
 images:
   - 'gcr.io/$PROJECT_ID/quarkus-app'
