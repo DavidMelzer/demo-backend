@@ -1,11 +1,16 @@
 steps:
+  - name: 'alpine'
+    entrypoint: sh
+    args: ['-c', 'echo "🕵️ Check files im Kontext:" && ls -la && echo "---" && ls -la demo-backend']
+
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-f', 'Dockerfile',                    # Dockerfile liegt direkt in demo-backend
+      '-f', 'Dockerfile',
       '-t', 'gcr.io/$PROJECT_ID/quarkus-app',
-      '.'                                    # Kontext: alles in demo-backend
+      '.'
     ]
-    dir: 'demo-backend'  # <- DAS ist der Fix: wir betreten /demo-backend vor dem Build
+    dir: 'demo-backend'
+
 images:
   - 'gcr.io/$PROJECT_ID/quarkus-app'
