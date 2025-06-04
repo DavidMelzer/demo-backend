@@ -2,7 +2,9 @@ package dev.bomboclat.resource;
 
 import dev.bomboclat.model.LoginRequest;
 import dev.bomboclat.model.LoginResponse;
+import dev.bomboclat.model.RegisterRequest;
 import dev.bomboclat.service.AuthService;
+import dev.bomboclat.service.UserService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -20,6 +22,9 @@ public class AuthResource {
 
     @Inject
     AuthService authService;
+
+    @Inject
+    UserService userService;
 
     /**
      * Login endpoint that authenticates users and returns JWT tokens
@@ -39,5 +44,19 @@ public class AuthResource {
         return token
                 .map(t -> Response.ok(new LoginResponse(t)).build())
                 .orElse(Response.status(Response.Status.UNAUTHORIZED).build());
+    }
+
+    @POST
+    @Path("/register")
+    public Response register(RegisterRequest request) {
+        if (request == null || request.email == null || request.password == null || request.name == null) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        try {
+            userService.register(request.email, request.password, request.name);
+            return Response.status(Response.Status.CREATED).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
     }
 }

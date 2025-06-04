@@ -21,7 +21,7 @@ public class JwtAuthFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) {
         // Skip authentication for paths that don't require it
         String path = requestContext.getUriInfo().getPath();
-        if (!path.startsWith("patient-data")) {
+        if (!path.startsWith("patient-data") && !path.startsWith("symptoms")) {
             return;
         }
 
