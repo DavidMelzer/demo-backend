@@ -7,8 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.UUID;
 
 @Entity
@@ -20,7 +18,7 @@ public class SymptomEntry extends PanacheEntityBase {
     @ManyToOne(optional = false)
     public User user;
 
-    public OffsetDateTime timestamp;
+    public LocalDateTime timestamp;
 
     public int painLevel;
 
@@ -33,7 +31,7 @@ public class SymptomEntry extends PanacheEntityBase {
     @PrePersist
     public void prePersist() {
         if (timestamp == null) {
-            timestamp = OffsetDateTime.now();
+            timestamp = LocalDateTime.now();
         }
     }
 }
