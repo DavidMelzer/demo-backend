@@ -13,13 +13,6 @@ public class AiResource {
     @Inject
     AiService assistant;
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    @Path("/basic")
-    public String chat(@QueryParam("message") String message) {
-        return assistant.chat(message);
-    }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/habits")
